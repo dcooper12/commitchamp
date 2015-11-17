@@ -14,19 +14,14 @@ module Commitchamp
     	}
     end
 
-    def contributors(owner, repo)
-      self.class.get.("/repos/#{owner}/#{repo}/stats/contributors", :headers => @auth)
+    def get_contributors(owner, repo)
+      Repos.get.("/repos/#{owner}/#{repo}/stats/contributors", headers: => @auth)
         
     end
 
-    def repo
-      #prompt and return repo name
-      puts "Which repository would you like to access?"
-      @name = gets.chomp
-      puts "What is the owner's name?"
-      @owner = gets.chomp
-      # self.class.get("/orgs/#{owner}/repos", :headers => @auth)
-    binding.pry
+    def get_repos(owner)    
+      Repos.get("/orgs/#{owner}/repos", headers: => @auth
+                                        body: options.to_json)
     end
   end
 end
